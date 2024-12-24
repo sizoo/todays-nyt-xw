@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Latest NYT Crossword</title>
+  <script>
+    (function () {
+      // Create date object
+      var now = new Date();
+
+      // If it’s before 06:00 UTC, puzzle might not be published yet; use yesterday’s date
+      if (now.getUTCHours() < 6) {
+        now.setDate(now.getDate() - 1);
+      }
+
+      // Prepare date components
+      var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      var monthStr = months[now.getMonth()];
+      var dayStr = ("0" + now.getDate()).slice(-2);
+      var yearStr = now.getFullYear().toString().slice(-2);
+
+      // Construct the NYT crossword PDF URL: e.g., https://www.nytimes.com/svc/crosswords/v2/puzzle/print/Jun0824.pdf
+      var crosswordUrl = "https://www.nytimes.com/svc/crosswords/v2/puzzle/print/" +
+                         monthStr + dayStr + yearStr + ".pdf";
+
+      // Redirect the browser to the latest puzzle
+      window.location.href = crosswordUrl;
+    })();
+  </script>
+</head>
+<body>
+</body>
+</html>
